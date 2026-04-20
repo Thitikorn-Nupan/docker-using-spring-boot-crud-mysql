@@ -1,7 +1,7 @@
 package com.ttknpdev.buildbasicapiusingspringboot.dao;
 
 import com.ttknpdev.buildbasicapiusingspringboot.entity.Romance;
-import com.ttknpdev.buildbasicapiusingspringboot.log.MyLog;
+import com.ttknpdev.buildbasicapiusingspringboot.log.Log4J;
 import com.ttknpdev.buildbasicapiusingspringboot.repository.RomanceRepository;
 import com.ttknpdev.buildbasicapiusingspringboot.service.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import java.util.Map;
 public class RomanceDao implements BooksService<Romance> {
 
     private final RomanceRepository repository;
-    private final MyLog myLog;
+    private final Log4J log4J;
 
     @Autowired
     public RomanceDao(RomanceRepository repository) {
         this.repository = repository;
-        myLog = new MyLog(RomanceDao.class);
+        log4J = new Log4J(RomanceDao.class);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class RomanceDao implements BooksService<Romance> {
     @Override
     public Romance read(String rid) {
         return repository.findById(rid).map(romance -> {
-            myLog.log4j.info("RID : "+rid+" exits!!");
+            log4J.logger.info("RID : "+rid+" exits!!");
             return romance;
         }).orElseThrow(()-> new RuntimeException("RID : " + rid + " didn't exit!!"));
     }
@@ -47,7 +47,7 @@ public class RomanceDao implements BooksService<Romance> {
             return repository.save(romance);
         }).orElseThrow(() -> {
             // *** response.put("deleted",null);
-            myLog.log4j.info("RID : "+rid+" exits!!");
+            log4J.logger.info("RID : "+rid+" exits!!");
             return new RuntimeException(("RID : "+rid+" exits!!"));
         });
     }
@@ -61,7 +61,7 @@ public class RomanceDao implements BooksService<Romance> {
             return response;
         }).orElseThrow(() -> {
             // response.put("deleted",null);
-            myLog.log4j.info("RID : "+rid+" exits!!");
+            log4J.logger.info("RID : "+rid+" exits!!");
             return new RuntimeException(("RID : "+rid+" exits!!"));
         });
     }

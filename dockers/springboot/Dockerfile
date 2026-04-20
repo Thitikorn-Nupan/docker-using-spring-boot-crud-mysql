@@ -1,5 +1,5 @@
 ### Use official base image of Java Runtime (JDK version that you use) # In spring boot we have to specify outside port for mapping inside port alway when run spring-boot in container
-FROM openjdk:17
+FROM openjdk:27-ea-17-jdk
 LABEL authors="ttknp"
 
 
