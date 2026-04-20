@@ -1,11 +1,11 @@
 version: '3'
 services: # you can build by command docker-compose up -d --build (it will call any compose that I extend)
-  api:
+  api: # docker-compose up -d --build api
     extends:
       file: docker-compose-springboot.yml
       service: backend
   # don't forget db it has to use accessing database (jdbc:mysql://db:3306/books)
-  db:
+  db: # docker-compose up -d --build db
     extends:
       file: docker-compose-database.yml
       service: database
